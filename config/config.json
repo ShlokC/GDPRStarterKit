@@ -1,0 +1,27 @@
+{
+  "$schema": "https://dev.office.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "gdpr-insert-event-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/gdprInsertEvent/GdprInsertEventWebPart.js",
+          "manifest": "./src/webparts/gdprInsertEvent/GdprInsertEventWebPart.manifest.json"
+        }
+      ]
+    },
+    "gdpr-insert-request-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/gdprInsertRequest/GdprInsertRequestWebPart.js",
+          "manifest": "./src/webparts/gdprInsertRequest/GdprInsertRequestWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "GdprInsertEventWebPartStrings": "lib/webparts/gdprInsertEvent/loc/{locale}.js",
+    "GdprInsertRequestWebPartStrings": "lib/webparts/gdprInsertRequest/loc/{locale}.js"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "version": "1.4.1",
+    "libraryName": "gdpr-starter-kit",
+    "libraryId": "cf86332e-4c38-485c-a99d-c45c94f68c21",
+    "environment": "spo"
+  }
+}
