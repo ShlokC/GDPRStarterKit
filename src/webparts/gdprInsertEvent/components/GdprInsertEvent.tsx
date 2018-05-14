@@ -72,6 +72,12 @@ export default class GdprInsertEvent extends React.Component<IGdprInsertEventPro
       toBeDetermined: false,
       indirectDataProvider: false,
       eventStartDate: now,
+      title:"",
+      notifiedBy:"",
+      postEventReport:"",
+      breachType: undefined,
+      severity:undefined,
+      eventAssignedTo:undefined
     };
   }
 
@@ -660,14 +666,14 @@ export default class GdprInsertEvent extends React.Component<IGdprInsertEventPro
             <div className="ms-Grid-col ms-u-lg10 ms-u-xl8 ms-u-xlPush2 ms-u-lgPush1">
               <PrimaryButton
                 data-automation-id='saveRequest'
-                label={ strings.SaveButtonText  }
+                text={ strings.SaveButtonText  }
                 disabled={ !this.state.isValid }
                 onClick={ this._saveClick }
                 />
                 &nbsp;&nbsp;
               <Button
                 data-automation-id='cancel'
-                label={ strings.CancelButtonText  }
+                text={ strings.CancelButtonText  }
                 onClick={ this._cancelClick }
                 />
             </div>
@@ -684,10 +690,10 @@ export default class GdprInsertEvent extends React.Component<IGdprInsertEventPro
           <DialogFooter>
             <PrimaryButton
               onClick={ this._insertNextClick } 
-              label={ strings.InsertNextLabel } />
+              text={ strings.InsertNextLabel } />
             <DefaultButton 
               onClick={ this._goHomeClick }
-              label={ strings.GoHomeLabel } />
+              text={ strings.GoHomeLabel } />
           </DialogFooter>
         </Dialog>
       </div>
@@ -709,12 +715,12 @@ export default class GdprInsertEvent extends React.Component<IGdprInsertEventPro
   @autobind
   private _updateState(state: IGdprInsertEventState): void {
     state.isValid = this._formIsValid();
-    this.setState(state);
+    this.setState.bind(this,state);
   }
 
   @autobind
   private _onChangedEventType(ev: React.FormEvent<HTMLInputElement>, option: any) {
-    this.setState({currentEventType : option.key, 
+    this.setState.bind(this,{currentEventType : option.key, 
     breachType : null,
     riskType : null,
     severity : null,
@@ -730,7 +736,7 @@ export default class GdprInsertEvent extends React.Component<IGdprInsertEventPro
 
   @autobind
   private _onChangedEstimatedAffectedSubjectsToBeDetermined(checked: boolean): void {
-    this.setState({toBeDetermined : checked});
+    this.setState.bind(this,{toBeDetermined : checked});
     this._updateState(this.state);
   }
 
@@ -748,43 +754,43 @@ export default class GdprInsertEvent extends React.Component<IGdprInsertEventPro
 
   @autobind
   private _onChangedTitle(newValue: string): void {
-    this.setState({title : newValue});
+    this.setState({title : newValue} as IGdprInsertEventState);
     this._updateState(this.state);
   }
 
   @autobind
   private _onChangedNotifiedBy(newValue: string): void {
-    this.setState({notifiedBy : newValue});
+    this.setState({notifiedBy : newValue} as IGdprInsertEventState);
     this._updateState(this.state);
   }
 
   @autobind
   private _onChangedEventAssignedTo(items: string[]): void {
-    this.setState({eventAssignedTo : items[0]});
+    this.setState({eventAssignedTo : items[0]} as IGdprInsertEventState);
     this._updateState(this.state);
   }
 
   @autobind
   private _onChangedEventStartDate(newValue: Date): void {
-    this.setState({eventStartDate : newValue});
+    this.setState({eventStartDate : newValue} as IGdprInsertEventState);
     this._updateState(this.state);
   }
 
   @autobind
   private _onChangedEventEndDate(newValue: Date): void {
-    this.setState({eventEndDate : newValue});
+    this.setState({eventEndDate : newValue} as IGdprInsertEventState);
     this._updateState(this.state);
   }
 
   @autobind
   private _onChangedPostEventReport(newValue: string): void {
-    this.setState({postEventReport : newValue});
+    this.setState({postEventReport : newValue} as IGdprInsertEventState);
     this._updateState(this.state);
   }
 
   @autobind
   private _onChangedAdditionalNotes(newValue: string): void {
-    this.setState({additionalNotes : newValue});
+    this.setState({additionalNotes : newValue} as IGdprInsertEventState);
     this._updateState(this.state);
   }
 
@@ -792,11 +798,11 @@ export default class GdprInsertEvent extends React.Component<IGdprInsertEventPro
   private _onChangedBreachType(terms: ISPTermObject[]): void {
     if (terms != null && terms.length > 0)
     {
-      this.setState({breachType : terms[0]});
+      this.setState({breachType : terms[0]} as IGdprInsertEventState);
     }
     else
     {
-      this.setState({breachType : null});
+      this.setState({breachType : null} as IGdprInsertEventState);
     }
     this._updateState(this.state);
   }
@@ -805,11 +811,11 @@ export default class GdprInsertEvent extends React.Component<IGdprInsertEventPro
   private _onChangedRiskType(terms: ISPTermObject[]): void {
     if (terms != null && terms.length > 0)
     {
-      this.setState({riskType : terms});
+      this.setState({riskType : terms} as IGdprInsertEventState);
     }
     else
     {
-      this.setState({riskType : []});
+      this.setState({riskType : []} as IGdprInsertEventState);
     }
     this._updateState(this.state);
   }
@@ -818,60 +824,60 @@ export default class GdprInsertEvent extends React.Component<IGdprInsertEventPro
   private _onChangedSeverity(terms: ISPTermObject[]): void {
     if (terms != null && terms.length > 0)
     {
-      this.setState({severity : terms[0]});
+      this.setState({severity : terms[0]} as IGdprInsertEventState);
     }
     else
     {
-      this.setState({severity : null});
+      this.setState({severity : null} as IGdprInsertEventState);
     }
     this._updateState(this.state);
   }
 
   @autobind
   private _onChangedDPANotified(newValue: boolean): void {
-    this.setState({dpaNotified : newValue});
+    this.setState({dpaNotified : newValue} as IGdprInsertEventState);
     this._updateState(this.state);
   }
 
   @autobind
   private _onChangedDPANotificationDate(newValue: Date): void {
-    this.setState({dpaNotificationDate : newValue});
+    this.setState.bind(this,{dpaNotificationDate : newValue});
     this._updateState(this.state);
   }
 
   @autobind
   private _onChangedIncludesChildrenInProgress(checked: boolean): void {
-    this.setState({includesChildrenInProgress : checked});
+    this.setState.bind(this,{includesChildrenInProgress : checked});
     this._updateState(this.state);
   }
 
   @autobind
   private _onChangedEstimatedAffectedSubjects(newValue: number): void {
-    this.setState({estimatedAffectedSubjects : newValue});
+    this.setState.bind(this,{estimatedAffectedSubjects : newValue});
     this._updateState(this.state);
   }
 
   @autobind
   private _onChangedIncludesChildren(newValue: boolean): void {
-    this.setState({includesChildren : newValue});
+    this.setState.bind(this,{includesChildren : newValue});
     this._updateState(this.state);
   }
 
   @autobind
   private _onChangedActionPlan(newValue: string): void {
-    this.setState({actionPlan : newValue});
+    this.setState.bind(this,{actionPlan : newValue});
     this._updateState(this.state);
   }
 
   @autobind
   private _onChangedBreachResolved(newValue: boolean): void {
-    this.setState({breachResolved : newValue});
+    this.setState.bind(this,{breachResolved : newValue});
     this._updateState(this.state);
   }
 
   @autobind
   private _onChangedActionsTaken(newValue: string): void {
-    this.setState({actionsTaken : newValue});
+    this.setState.bind(this,{actionsTaken : newValue});
     this._updateState(this.state);
   }
 
@@ -879,42 +885,42 @@ export default class GdprInsertEvent extends React.Component<IGdprInsertEventPro
   private _onChangedIncludesSensitiveData(terms: ISPTermObject[]): void {
     if (terms != null && terms.length > 0)
     {
-      this.setState({includesSensitiveData : terms[0]});
+      this.setState.bind(this,{includesSensitiveData : terms[0]});
     }
     else
     {
-      this.setState({includesSensitiveData : null});
+      this.setState.bind(this,{includesSensitiveData : null});
     }
     this._updateState(this.state);
   }
   
   @autobind
   private _onChangedConsentIsInternal(checked: boolean): void {
-    this.setState({consentIsInternal : checked});
+    this.setState.bind(this,{consentIsInternal : checked});
     this._updateState(this.state);
   }
 
   @autobind
   private _onChangedDataSubjectIsChild(checked: boolean): void {
-    this.setState({dataSubjectIsChild : checked});
+    this.setState.bind(this,{dataSubjectIsChild : checked});
     this._updateState(this.state);
   }
   
   @autobind
   private _onChangedIndirectDataProvider(checked: boolean): void {
-    this.setState({indirectDataProvider : checked});
+    this.setState.bind(this,{indirectDataProvider : checked});
     this._updateState(this.state);
   }
 
   @autobind
   private _onChangedDataProvider(newValue: string): void {
-    this.setState({dataProvider : newValue});
+    this.setState.bind(this,{dataProvider : newValue});
     this._updateState(this.state);
   }
 
   @autobind
   private _onChangedConsentNotes(newValue: string): void {
-    this.setState({consentNotes : newValue});
+    this.setState.bind(this,{consentNotes : newValue});
     this._updateState(this.state);
   }
 
@@ -922,11 +928,11 @@ export default class GdprInsertEvent extends React.Component<IGdprInsertEventPro
   private _onChangedConsentType(terms: ISPTermObject[]): void {
     if (terms != null && terms.length > 0)
     {
-      this.setState({consentType : terms});
+      this.setState.bind(this,{consentType : terms});
     }
     else
     {
-      this.setState({consentType : []});
+      this.setState.bind(this,{consentType : []});
     }
     this._updateState(this.state);
   }
@@ -935,36 +941,36 @@ export default class GdprInsertEvent extends React.Component<IGdprInsertEventPro
   private _onChangedConsentWithdrawalType(terms: ISPTermObject[]): void {
     if (terms != null && terms.length > 0)
     {
-      this.setState({consentWithdrawalType : terms});
+      this.setState.bind(this,{consentWithdrawalType : terms});
     }
     else
     {
-      this.setState({consentWithdrawalType : []});
+      this.setState.bind(this,{consentWithdrawalType : []});
     }
     this._updateState(this.state);
   }
 
   @autobind
   private _onChangedConsentWithdrawalNotes(newValue: string): void {
-    this.setState({consentWithdrawalNotes : newValue});
+    this.setState.bind(this,{consentWithdrawalNotes : newValue});
     this._updateState(this.state);
   }
 
   @autobind
   private _onChangedOriginalConsentAvailable(checked: boolean): void {
-    this.setState({originalConsentAvailable : checked});
+    this.setState.bind(this,{originalConsentAvailable : checked});
     this._updateState(this.state);
   }
 
   @autobind
   private _onChangedOriginalConsent(selectedItemIds: number[]): void {
-    this.setState({originalConsent : selectedItemIds[0]});
+    this.setState.bind(this,{originalConsent : selectedItemIds[0]});
     this._updateState(this.state);
   }
 
   @autobind
   private _onChangedNotifyApplicable(checked: boolean): void {
-    this.setState({notifyApplicable : checked});
+    this.setState.bind(this,{notifyApplicable : checked});
     this._updateState(this.state);
   }
 
@@ -972,36 +978,36 @@ export default class GdprInsertEvent extends React.Component<IGdprInsertEventPro
   private _onChangedProcessingType(terms: ISPTermObject[]): void {
     if (terms != null && terms.length > 0)
     {
-      this.setState({processingType : terms});
+      this.setState.bind(this,{processingType : terms});
     }
     else
     {
-      this.setState({processingType : []});
+      this.setState.bind(this,{processingType : []});
     }
     this._updateState(this.state);
   }
 
   @autobind
   private _onChangedProcessors(items: string[]): void {
-    this.setState({processors : items});
+    this.setState.bind(this,{processors : items});
     this._updateState(this.state);
   }
 
   @autobind
   private _onChangedArchivedData(newValue: string): void {
-    this.setState({archivedData : newValue});
+    this.setState.bind(this,{archivedData : newValue});
     this._updateState(this.state);
   }
 
   @autobind
   private _onChangedAnonymize(checked: boolean): void {
-    this.setState({anonymize : checked});
+    this.setState.bind(this,{anonymize : checked});
     this._updateState(this.state);
   }
 
   @autobind
   private _onChangedArchivingNotes(newValue: string): void {
-    this.setState({archivingNotes : newValue});
+    this.setState.bind(this,{archivingNotes : newValue});
     this._updateState(this.state);
   }
 
@@ -1123,7 +1129,7 @@ export default class GdprInsertEvent extends React.Component<IGdprInsertEventPro
       }
 
       dataManager.insertNewEvent(eventItem).then((itemId: number) => {
-        this.setState({showDialogResult : true});
+        this.setState.bind(this,{showDialogResult : true});
         this._updateState(this.state);
       });
     }
@@ -1136,18 +1142,25 @@ export default class GdprInsertEvent extends React.Component<IGdprInsertEventPro
   }
 
   private _formIsValid() : boolean {
-    let isValid: boolean = 
+      let isValid: boolean = 
+      (this.state.title != null && this.state.title.length > 0) &&
+      (this.state.notifiedBy != null && this.state.notifiedBy.length > 0) &&
+      (this.state.eventStartDate != null) &&
+      (this.state.postEventReport != null && this.state.postEventReport.length > 0);
+/*
+ let isValid: boolean = 
       (this.state.title != null && this.state.title.length > 0) &&
       (this.state.notifiedBy != null && this.state.notifiedBy.length > 0) &&
       (this.state.eventAssignedTo != null && this.state.eventAssignedTo.length > 0) &&
       (this.state.eventStartDate != null) &&
       (this.state.postEventReport != null && this.state.postEventReport.length > 0);
-
-    if (this.state.currentEventType == "DataBreach") {
+       if (this.state.currentEventType == "DataBreach") {
       isValid = isValid && this.state.breachType != null;
       isValid = isValid && this.state.severity != null;
       isValid = isValid && ((this.state.dpaNotified && this.state.dpaNotificationDate != null) || (!this.state.dpaNotified));
-    }
+      }
+*/
+   
     if (this.state.currentEventType == "IdentityRisk") {
       isValid = isValid && this.state.riskType != null;
       isValid = isValid && this.state.severity != null;
@@ -1171,7 +1184,7 @@ export default class GdprInsertEvent extends React.Component<IGdprInsertEventPro
 
   @autobind
   private _closeInsertDialogResult() {
-    this.setState({showDialogResult : false});
+    this.setState.bind(this,{showDialogResult : false});
     this._updateState(this.state);
   }
 

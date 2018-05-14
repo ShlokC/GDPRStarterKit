@@ -32,26 +32,4 @@ export default class GdprInsertEventWebPart extends GdprBaseWebPart {
   protected get dataVersion(): Version {
     return Version.parse('1.0');
   }
-
-  protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
-    return {
-      pages: [
-        {
-          header: {
-            description: strings.PropertyPaneDescription
-          },
-          groups: [
-            {
-              groupName: strings.BasicGroupName,
-              groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
-                })
-              ]
-            }
-          ]
-        }
-      ]
-    };
-  }
 }

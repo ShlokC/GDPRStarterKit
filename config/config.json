@@ -17,11 +17,29 @@
           "manifest": "./src/webparts/gdprInsertRequest/GdprInsertRequestWebPart.manifest.json"
         }
       ]
+    },
+    "gdpr-dashboard-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/gdprDashboard/GdprDashboardWebPart.js",
+          "manifest": "./src/webparts/gdprDashboard/GdprDashboardWebPart.manifest.json"
+        }
+      ]
+    },
+    "gdpr-hierarchy-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/gdprHierarchy/GdprHierarchyWebPart.js",
+          "manifest": "./src/webparts/gdprHierarchy/GdprHierarchyWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
   "localizedResources": {
     "GdprInsertEventWebPartStrings": "lib/webparts/gdprInsertEvent/loc/{locale}.js",
-    "GdprInsertRequestWebPartStrings": "lib/webparts/gdprInsertRequest/loc/{locale}.js"
+    "GdprInsertRequestWebPartStrings": "lib/webparts/gdprInsertRequest/loc/{locale}.js",
+    "GdprDashboardWebPartStrings": "lib/webparts/gdprDashboard/loc/{locale}.js",
+    "GdprHierarchyWebPartStrings": "lib/webparts/gdprHierarchy/loc/{locale}.js"
   }
 }

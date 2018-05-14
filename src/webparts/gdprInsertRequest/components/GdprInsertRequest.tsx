@@ -64,6 +64,22 @@ export default class GdprInsertRequest extends React.Component<IGdprInsertReques
       currentRequestType : "Access",
       isValid: false,
       showDialogResult: false,
+      title:"",
+      dataSubject:"",
+      dataSubjectEmail:"",
+      verifiedDataSubject: undefined,
+      requestAssignedTo: undefined,
+      requestInsertionDate: undefined,
+      requestDueDate: undefined,
+      additionalNotes: undefined,
+      deliveryMethod: undefined,
+      correctionDefinition: undefined,
+      deliveryFormat: undefined,
+      personalData: undefined,
+      processingType: undefined,
+      notifyApplicable: undefined,
+      reason: undefined
+          
     };
   }
 
@@ -317,14 +333,14 @@ export default class GdprInsertRequest extends React.Component<IGdprInsertReques
             <div className="ms-Grid-col ms-u-lg10 ms-u-xl8 ms-u-xlPush2 ms-u-lgPush1">
               <PrimaryButton
                 data-automation-id='saveRequest'
-                label={ strings.SaveButtonText  }
+                text={ strings.SaveButtonText  }
                 disabled={ !this.state.isValid }
                 onClick={ this._saveClick }
                 />
                 &nbsp;&nbsp;
               <Button
                 data-automation-id='cancel'
-                label={ strings.CancelButtonText  }
+                text={ strings.CancelButtonText  }
                 onClick={ this._cancelClick }
                 />
             </div>
@@ -341,10 +357,10 @@ export default class GdprInsertRequest extends React.Component<IGdprInsertReques
           <DialogFooter>
             <PrimaryButton
               onClick={ this._insertNextClick } 
-              label={ strings.InsertNextLabel } />
+              text={ strings.InsertNextLabel } />
             <DefaultButton 
               onClick={ this._goHomeClick }
-              label={ strings.GoHomeLabel } />
+              text={ strings.GoHomeLabel } />
           </DialogFooter>
         </Dialog>
       </div>
@@ -353,10 +369,10 @@ export default class GdprInsertRequest extends React.Component<IGdprInsertReques
 
   @autobind
   private _onChangedRequestType(ev: React.FormEvent<HTMLInputElement>, option: any) {
-    this.setState({currentRequestType : option.key});
-    this.setState({deliveryMethod : null});
-    this.setState({deliveryFormat : null});
-    this.setState({processingType : []});
+    this.setState.bind(this,{currentRequestType : option.key} as IGdprInsertRequestState);
+    this.setState.bind(this,{deliveryMethod : null} as IGdprInsertRequestState);
+    this.setState.bind(this,{deliveryFormat : null}as IGdprInsertRequestState);
+    this.setState.bind(this,{processingType : []} as IGdprInsertRequestState);
 
     this._updateState(this.state);
   }
@@ -388,115 +404,181 @@ export default class GdprInsertRequest extends React.Component<IGdprInsertReques
     state.isValid = this._formIsValid();
     this.setState(state);
   }
-
   @autobind
-  private _onChangedTitle(newValue: string): void {
-    this.setState({title:newValue});
-    this._updateState(this.state);
+  private _updateTitleState( state: IGdprInsertRequestState, newValue: string): void {
+    state.title= newValue;
+    //this.setState.bind(this, {title : newValue});
+    this.setState(state);
   }
 
+  @autobind
+  private _onChangedTitle( newValue: string): void {
+    
+    //this.setState.bind(this, {title : newValue});
+    this._updateTitleState(this.state,newValue);
+    this._updateState(this.state);
+  }
+  @autobind
+  private _updateDataSubjectState(state: IGdprInsertRequestState,newValue: string): void {
+    state.dataSubject= newValue;
+    this.setState(state);  
+  }
   @autobind
   private _onChangedDataSubject(newValue: string): void {
-    this.setState({dataSubject:newValue});
+    this._updateDataSubjectState(this.state,newValue);
     this._updateState(this.state);
   }
-
+  @autobind
+  private _updateDataSubjectEmail(state: IGdprInsertRequestState,newValue: string): void {
+    state.dataSubjectEmail= newValue;
+    this.setState(state);  
+  }
   @autobind
   private _onChangedDataSubjectEmail(newValue: string): void {
-    this.setState({dataSubjectEmail:newValue});
+    this._updateDataSubjectEmail(this.state,newValue);
     this._updateState(this.state);
   }
 
+  @autobind
+  private _updateVerifiedDataSubject(state: IGdprInsertRequestState,newValue: boolean): void {
+    state.verifiedDataSubject= newValue;
+    this.setState(state);  
+  }
   @autobind
   private _onChangedVerifiedDataSubject(checked: boolean): void {
-    this.setState({verifiedDataSubject:checked});
+    this._updateVerifiedDataSubject(this.state,checked);
     this._updateState(this.state);
   }  
-
+  @autobind
+  private _updateRequestAssignedTo(state: IGdprInsertRequestState,newValue: string[]): void {
+    state.requestAssignedTo= newValue[0];
+    this.setState(state);  
+  }
   @autobind
   private _onChangedRequestAssignedTo(items: string[]): void {
-    this.setState({requestAssignedTo :items[0]});
+    this._updateRequestAssignedTo(this.state,items);
     this._updateState(this.state);
   }
-
+  @autobind
+  private _updateRequestInsertionDate(state: IGdprInsertRequestState,newValue: Date): void {
+    state.requestInsertionDate= newValue;
+    this.setState(state);  
+  }
   @autobind
   private _onChangedRequestInsertionDate(newValue: Date): void {
-    this.setState({requestInsertionDate:newValue});
+    this._updateRequestInsertionDate(this.state,newValue);
     this._updateState(this.state);
   }
-
+  @autobind
+  private _updateRequestDueDate(state: IGdprInsertRequestState,newValue: Date): void {
+    state.requestDueDate= newValue;
+    this.setState(state);  
+  }
   @autobind
   private _onChangedRequestDueDate(newValue: Date): void {
-    this.setState({requestDueDate : newValue});
+    this._updateRequestDueDate(this.state, newValue);
     this._updateState(this.state);
   }
-
+  @autobind
+  private _updateAdditionalNotes(state: IGdprInsertRequestState,newValue: string): void {
+    state.additionalNotes= newValue;
+    this.setState(state);  
+  }
   @autobind
   private _onChangedAdditionalNotes(newValue: string): void {
-    this.setState({additionalNotes:newValue});
+    this._updateAdditionalNotes(this.state, newValue);
     this._updateState(this.state);
   }
-
+  @autobind
+  private _updateDeliveryMethod(state: IGdprInsertRequestState,newValue: ISPTermObject): void {
+    state.deliveryMethod= newValue;
+    this.setState(state);  
+  }
   @autobind
   private _onChangedDeliveryMethod(terms: ISPTermObject[]): void {
     if (terms != null && terms.length > 0)
     {
-      this.setState({deliveryMethod : terms[0]});
+      this._updateDeliveryMethod(this.state,  terms[0]);
     }
     else
     {
-      this.setState({deliveryMethod : null});
+      this._updateDeliveryMethod(this.state,  null);
     }
     this._updateState(this.state);
   }
-
+  @autobind
+  private _updateCorrectionDefinition(state: IGdprInsertRequestState,newValue: string): void {
+    state.correctionDefinition= newValue;
+    this.setState(state);  
+  }
   @autobind
   private _onChangedCorrectionDefinition(newValue: string): void {
-    this.setState({correctionDefinition : newValue});
+    this._updateCorrectionDefinition(this.state, newValue);
     this._updateState(this.state);
   }
-
+  @autobind
+  private _updateDeliveryFormat(state: IGdprInsertRequestState,newValue: ISPTermObject): void {
+    state.deliveryFormat= newValue;
+    this.setState(state);  
+  }
   @autobind
   private _onChangedDeliveryFormat(terms: ISPTermObject[]): void {
     if (terms != null && terms.length > 0)
     {
-      this.setState({deliveryFormat : terms[0]});
+      this._updateDeliveryFormat(this.state, terms[0]);
     }
     else
     {
-      this.setState({deliveryFormat : null});
+      this._updateDeliveryFormat(this.state, null);
     }
+    this._updateState(this.state);
+  }
+  @autobind
+  private _updatePersonalData(state: IGdprInsertRequestState,newValue: string): void {
+    state.personalData= newValue;
+    this.setState(state);  
+  }
+  @autobind
+  private _onChangedPersonalData(newValue: string): void {
+    this._updatePersonalData(this.state,  newValue);
     this._updateState(this.state);
   }
 
   @autobind
-  private _onChangedPersonalData(newValue: string): void {
-    this.setState({personalData : newValue});
-    this._updateState(this.state);
+  private _updateProcessingType(state: IGdprInsertRequestState,newValue: ISPTermObject[]): void {
+    state.processingType= newValue;
+    this.setState(state);  
   }
-
   @autobind
   private _onChangedProcessingType(terms: ISPTermObject[]): void {
     if (terms != null && terms.length > 0)
     {
-      this.setState({processingType : terms});
+      this._updateProcessingType(this.state, terms);
     }
     else
     {
-      this.setState({processingType : []});
+      this._updateProcessingType(this.state, []);
     }
     this._updateState(this.state);
   }
-
+  @autobind
+  private _updateNotifyApplicable(state: IGdprInsertRequestState,newValue: boolean): void {
+    state.notifyApplicable= newValue;
+    this.setState(state);  
+  }
   @autobind
   private _onChangedNotifyApplicable(checked: boolean): void {
-    this.setState({notifyApplicable : checked});
+    this._updateNotifyApplicable(this.state, checked);
     this._updateState(this.state);
   }
-
+  @autobind
+  private _updateReason(state: IGdprInsertRequestState,newValue: string): void {
+    state.reason= newValue;
+    this.setState(state);  
+  }
   @autobind
   private _onChangedReason(newValue: string): void {
-    this.setState({reason : newValue});
+    this._updateReason(this.state, newValue);
     this._updateState(this.state);
   }
 
@@ -564,7 +646,7 @@ export default class GdprInsertRequest extends React.Component<IGdprInsertReques
       }
 
       dataManager.insertNewRequest(request).then((itemId: number) => {
-        this.setState({showDialogResult : true});
+        this.setState.bind(this,{showDialogResult : true});
         this._updateState(this.state);
       });
     }
@@ -602,7 +684,7 @@ export default class GdprInsertRequest extends React.Component<IGdprInsertReques
 
   @autobind
   private _closeInsertDialogResult() {
-    this.setState({showDialogResult : false});
+    this.setState.bind(this,{showDialogResult : false});
     this._updateState(this.state);
   }
 

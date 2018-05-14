@@ -3,7 +3,7 @@
   "solution": {
     "name": "gdpr-starter-kit-client-side-solution",
     "id": "cf86332e-4c38-485c-a99d-c45c94f68c21",
-    "version": "1.0.0.0",
+    "version": "1.0.0.1",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true
   },
