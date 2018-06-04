@@ -123,6 +123,7 @@ export default class GdprInsertEvent extends React.Component<IGdprInsertEventPro
                     text: strings.EventTypeDataArchivedLabel,
                   }
                 ]}
+                selectedKey={this.state.currentEventType}
               />
             </div>
           </div>
@@ -717,26 +718,35 @@ export default class GdprInsertEvent extends React.Component<IGdprInsertEventPro
     state.isValid = this._formIsValid();
     this.setState.bind(this,state);
   }
-
+  @autobind
+  private _onChangedStateEventType( option: any, state:IGdprInsertEventState) {
+    state.currentEventType = option.key; 
+    state.breachType = null;
+    state.riskType = null;
+    state.severity = null;
+    state.includesSensitiveData = null;
+    state.consentType = [];
+    state.consentWithdrawalType = [];
+    state.originalConsent = 0;
+    state.processingType = null;
+    state.processors = [];
+    
+    this.setState(this.state);
+  }
   @autobind
   private _onChangedEventType(ev: React.FormEvent<HTMLInputElement>, option: any) {
-    this.setState.bind(this,{currentEventType : option.key, 
-    breachType : null,
-    riskType : null,
-    severity : null,
-    includesSensitiveData : null,
-    consentType : [],
-    consentWithdrawalType : [],
-    originalConsent : 0,
-    processingType : null,
-    processors : []});
+    this._onChangedStateEventType(option,this.state); 
     
     this._updateState(this.state);
   }
-
+  @autobind
+  private _onStateToBeDetermined(state:IGdprInsertEventState, checked: boolean): void {
+    state.toBeDetermined = checked;
+    this.setState(this.state);
+  }
   @autobind
   private _onChangedEstimatedAffectedSubjectsToBeDetermined(checked: boolean): void {
-    this.setState.bind(this,{toBeDetermined : checked});
+    this._onStateToBeDetermined(this.state, checked);
     this._updateState(this.state);
   }
 
@@ -753,264 +763,425 @@ export default class GdprInsertEvent extends React.Component<IGdprInsertEventPro
   }
 
   @autobind
+  private _onStateTitle(state:IGdprInsertEventState, newValue: string): void {
+    state.title = newValue;
+    this.setState(this.state);
+  }
+
+  @autobind
   private _onChangedTitle(newValue: string): void {
-    this.setState({title : newValue} as IGdprInsertEventState);
+    this._onStateTitle(this.state, newValue);
     this._updateState(this.state);
+  }
+
+  @autobind
+  private _onStateNotifiedBy(state:IGdprInsertEventState,newValue: string): void {
+    state.notifiedBy = newValue;
+    this.setState(this.state);
   }
 
   @autobind
   private _onChangedNotifiedBy(newValue: string): void {
-    this.setState({notifiedBy : newValue} as IGdprInsertEventState);
+    this._onStateNotifiedBy(this.state,newValue);
     this._updateState(this.state);
   }
 
+  @autobind
+  private _onStateEventAssignedTo(state:IGdprInsertEventState,items: string[]): void {
+    state.eventAssignedTo = items[0];
+    this.setState(this.state);
+  }
   @autobind
   private _onChangedEventAssignedTo(items: string[]): void {
-    this.setState({eventAssignedTo : items[0]} as IGdprInsertEventState);
+    this._onStateEventAssignedTo(this.state, items);
     this._updateState(this.state);
   }
-
+  @autobind
+  private _onStateEventStartDate(state:IGdprInsertEventState, newValue: Date): void {
+    state.eventStartDate = newValue;
+    this.setState(this.state);
+  }
   @autobind
   private _onChangedEventStartDate(newValue: Date): void {
-    this.setState({eventStartDate : newValue} as IGdprInsertEventState);
+    this._onStateEventStartDate(this.state,newValue);
+    this._updateState(this.state);
+  }
+  private _onStateEventEndDate(state:IGdprInsertEventState, newValue: Date): void {
+    state.eventEndDate = newValue;
+    this.setState(this.state);
+  }
+  @autobind
+  private _onChangedEventEndDate(newValue: Date): void {
+    this._onStateEventEndDate(this.state, newValue);
     this._updateState(this.state);
   }
 
   @autobind
-  private _onChangedEventEndDate(newValue: Date): void {
-    this.setState({eventEndDate : newValue} as IGdprInsertEventState);
-    this._updateState(this.state);
+  private _onStatePostEventReport(state: IGdprInsertEventState, newValue: string): void {
+    state.postEventReport = newValue;
+    this.setState(this.state);
   }
 
   @autobind
   private _onChangedPostEventReport(newValue: string): void {
-    this.setState({postEventReport : newValue} as IGdprInsertEventState);
+    this._onStatePostEventReport(this.state, newValue);
     this._updateState(this.state);
   }
 
   @autobind
+  private _onStateAdditionalNotes(state: IGdprInsertEventState, newValue: string): void {
+    state.additionalNotes = newValue;
+    this.setState(this.state);
+  }
+  @autobind
   private _onChangedAdditionalNotes(newValue: string): void {
-    this.setState({additionalNotes : newValue} as IGdprInsertEventState);
+    this._onStateAdditionalNotes(this.state,newValue);
     this._updateState(this.state);
   }
-
+  @autobind
+  private _onStateBreachType(state: IGdprInsertEventState, terms: ISPTermObject): void {
+    state.breachType = terms;
+    this.setState(this.state);
+  }
   @autobind
   private _onChangedBreachType(terms: ISPTermObject[]): void {
     if (terms != null && terms.length > 0)
     {
-      this.setState({breachType : terms[0]} as IGdprInsertEventState);
+      this._onStateBreachType(this.state,terms[0]);
     }
     else
     {
-      this.setState({breachType : null} as IGdprInsertEventState);
+      this._onStateBreachType(this.state, null);
     }
     this._updateState(this.state);
   }
-
+@autobind
+  private _onStateRiskType(state: IGdprInsertEventState, terms: ISPTermObject[]): void {
+    state.riskType = terms;
+    this.setState(this.state);
+  }
   @autobind
   private _onChangedRiskType(terms: ISPTermObject[]): void {
     if (terms != null && terms.length > 0)
     {
-      this.setState({riskType : terms} as IGdprInsertEventState);
+      this._onStateRiskType(this.state, terms);
     }
     else
     {
-      this.setState({riskType : []} as IGdprInsertEventState);
+      this._onStateRiskType(this.state, []);
     }
     this._updateState(this.state);
   }
-
+  @autobind
+  private _onStateSeverity(state: IGdprInsertEventState, terms: ISPTermObject): void {
+    state.severity = terms;
+    this.setState(this.state);
+  }
   @autobind
   private _onChangedSeverity(terms: ISPTermObject[]): void {
     if (terms != null && terms.length > 0)
     {
-      this.setState({severity : terms[0]} as IGdprInsertEventState);
+      this._onStateSeverity(this.state, terms[0]);
     }
     else
     {
-      this.setState({severity : null} as IGdprInsertEventState);
+      this._onStateSeverity(this.state, null);
     }
     this._updateState(this.state);
   }
-
+  @autobind
+  private _onStateDPANotified(state:IGdprInsertEventState,newValue: boolean): void {
+    state.dpaNotified = newValue;
+    this.setState(this.state);
+  }
   @autobind
   private _onChangedDPANotified(newValue: boolean): void {
-    this.setState({dpaNotified : newValue} as IGdprInsertEventState);
+    this._onStateDPANotified(this.state, newValue);
     this._updateState(this.state);
   }
 
+  @autobind
+  private _onStateDPANotificationDate(state:IGdprInsertEventState,newValue: Date): void {
+    state.dpaNotificationDate = newValue;
+    this.setState(this.state);
+  }
   @autobind
   private _onChangedDPANotificationDate(newValue: Date): void {
-    this.setState.bind(this,{dpaNotificationDate : newValue});
+    this._onStateDPANotificationDate(this.state, newValue);
     this._updateState(this.state);
   }
 
   @autobind
+  private _onStateIncludesChildrenInProgress(state:IGdprInsertEventState,newValue: boolean): void {
+    state.includesChildrenInProgress = newValue;
+    this.setState(this.state);
+  }
+  @autobind
   private _onChangedIncludesChildrenInProgress(checked: boolean): void {
-    this.setState.bind(this,{includesChildrenInProgress : checked});
+    this._onStateIncludesChildrenInProgress(this.state, checked);
     this._updateState(this.state);
+  }
+  
+  @autobind
+  private _onStateEstimatedAffectedSubjects(state:IGdprInsertEventState,newValue: number): void {
+    state.estimatedAffectedSubjects = newValue;
+    this.setState(this.state);
   }
 
   @autobind
   private _onChangedEstimatedAffectedSubjects(newValue: number): void {
-    this.setState.bind(this,{estimatedAffectedSubjects : newValue});
+    this._onStateEstimatedAffectedSubjects(this.state, newValue);
     this._updateState(this.state);
   }
-
+  @autobind
+  private _onStateIncludesChildren(state:IGdprInsertEventState,newValue: boolean): void {
+    state.includesChildren = newValue;
+    this.setState(this.state);
+  }
   @autobind
   private _onChangedIncludesChildren(newValue: boolean): void {
-    this.setState.bind(this,{includesChildren : newValue});
+    this._onStateIncludesChildren(this.state,  newValue);
     this._updateState(this.state);
   }
 
+  @autobind
+  private _onStateActionPlan(state:IGdprInsertEventState,newValue: string): void {
+    state.actionPlan = newValue;
+    this.setState(this.state);
+  }
   @autobind
   private _onChangedActionPlan(newValue: string): void {
-    this.setState.bind(this,{actionPlan : newValue});
+    this._onStateActionPlan(this.state, newValue);
     this._updateState(this.state);
   }
-
+  @autobind
+  private _onStateBreachResolved(state:IGdprInsertEventState,newValue: boolean): void {
+    state.breachResolved = newValue;
+    this.setState(this.state);
+  }
   @autobind
   private _onChangedBreachResolved(newValue: boolean): void {
-    this.setState.bind(this,{breachResolved : newValue});
+    this._onStateBreachResolved(this.state, newValue);
+    this._updateState(this.state);
+  }
+  @autobind
+  private _onStateActionsTaken(state:IGdprInsertEventState,newValue: string): void {
+    state.actionsTaken = newValue;
+    this.setState(this.state);
+  }
+  @autobind
+  private _onChangedActionsTaken(newValue: string): void {
+    this._onStateActionsTaken(this.state, newValue);
     this._updateState(this.state);
   }
 
   @autobind
-  private _onChangedActionsTaken(newValue: string): void {
-    this.setState.bind(this,{actionsTaken : newValue});
-    this._updateState(this.state);
+  private _onStateIncludesSensitiveData(state:IGdprInsertEventState,newValue: ISPTermObject): void {
+    state.includesSensitiveData = newValue;
+    this.setState(this.state);
   }
-
   @autobind
   private _onChangedIncludesSensitiveData(terms: ISPTermObject[]): void {
     if (terms != null && terms.length > 0)
     {
-      this.setState.bind(this,{includesSensitiveData : terms[0]});
+      this._onStateIncludesSensitiveData(this.state,  terms[0]);
     }
     else
     {
-      this.setState.bind(this,{includesSensitiveData : null});
+      this._onStateIncludesSensitiveData(this.state,  null);
     }
     this._updateState(this.state);
+  }
+  @autobind
+  private _onStateConsentIsInternal(state:IGdprInsertEventState,newValue: boolean): void {
+    state.consentIsInternal = newValue;
+    this.setState(this.state);
   }
   
   @autobind
   private _onChangedConsentIsInternal(checked: boolean): void {
-    this.setState.bind(this,{consentIsInternal : checked});
+    this._onStateConsentIsInternal(this.state, checked);
     this._updateState(this.state);
   }
 
   @autobind
+  private _onStateDataSubjectIsChild(state:IGdprInsertEventState,newValue: boolean): void {
+    state.dataSubjectIsChild = newValue;
+    this.setState(this.state);
+  }
+  
+  @autobind
   private _onChangedDataSubjectIsChild(checked: boolean): void {
-    this.setState.bind(this,{dataSubjectIsChild : checked});
+    this._onStateDataSubjectIsChild(this.state,checked);
     this._updateState(this.state);
   }
   
   @autobind
+  private _onStateIndirectDataProvider(state:IGdprInsertEventState,newValue: boolean): void {
+    state.indirectDataProvider = newValue;
+    this.setState(this.state);
+  }
+  @autobind
   private _onChangedIndirectDataProvider(checked: boolean): void {
-    this.setState.bind(this,{indirectDataProvider : checked});
+    this._onStateIndirectDataProvider(this.state, checked);
     this._updateState(this.state);
   }
 
+  @autobind
+  private _onStateDataProvider(state:IGdprInsertEventState,newValue: string): void {
+    state.dataProvider = newValue;
+    this.setState(this.state);
+  }
   @autobind
   private _onChangedDataProvider(newValue: string): void {
-    this.setState.bind(this,{dataProvider : newValue});
+    this._onStateDataProvider(this.state, newValue);
     this._updateState(this.state);
   }
-
+  @autobind
+  private _onStateConsentNotes(state:IGdprInsertEventState,newValue: string): void {
+    state.consentNotes = newValue;
+    this.setState(this.state);
+  }
   @autobind
   private _onChangedConsentNotes(newValue: string): void {
-    this.setState.bind(this,{consentNotes : newValue});
+    this._onStateConsentNotes(this.state,newValue);
     this._updateState(this.state);
   }
-
+  @autobind
+  private _onStateConsentType(state:IGdprInsertEventState, newValue: ISPTermObject[]): void {
+    state.consentType = newValue;
+    this.setState(this.state);
+  }
   @autobind
   private _onChangedConsentType(terms: ISPTermObject[]): void {
     if (terms != null && terms.length > 0)
     {
-      this.setState.bind(this,{consentType : terms});
+      this._onStateConsentType(this.state, terms);
     }
     else
     {
-      this.setState.bind(this,{consentType : []});
+      this._onStateConsentType(this.state, []);
     }
     this._updateState(this.state);
   }
 
+  @autobind
+  private _onStateconsentWithdrawalType(state:IGdprInsertEventState, newValue: ISPTermObject[]): void {
+    state.consentWithdrawalType = newValue;
+    this.setState(this.state);
+  }
   @autobind
   private _onChangedConsentWithdrawalType(terms: ISPTermObject[]): void {
     if (terms != null && terms.length > 0)
     {
-      this.setState.bind(this,{consentWithdrawalType : terms});
+      this._onStateconsentWithdrawalType(this.state, terms);
     }
     else
     {
-      this.setState.bind(this,{consentWithdrawalType : []});
+      this._onStateconsentWithdrawalType(this.state, []);
     }
     this._updateState(this.state);
   }
-
+  @autobind
+  private _stateConsentWithdrawalNotes(state:IGdprInsertEventState, newValue: string): void {
+    state.consentWithdrawalNotes =newValue;
+    this.setState(this.state);
+  }
   @autobind
   private _onChangedConsentWithdrawalNotes(newValue: string): void {
-    this.setState.bind(this,{consentWithdrawalNotes : newValue});
+    this._stateConsentWithdrawalNotes(this.state,newValue);
     this._updateState(this.state);
   }
-
+  @autobind
+  private _stateOriginalConsentAvailable(state:IGdprInsertEventState,checked: boolean): void {
+    state.originalConsentAvailable = checked;
+    this.setState(this.state);
+  }
   @autobind
   private _onChangedOriginalConsentAvailable(checked: boolean): void {
-    this.setState.bind(this,{originalConsentAvailable : checked});
+    this._stateOriginalConsentAvailable(this.state, checked);
     this._updateState(this.state);
   }
 
   @autobind
   private _onChangedOriginalConsent(selectedItemIds: number[]): void {
-    this.setState.bind(this,{originalConsent : selectedItemIds[0]});
+    this._stateOriginalConsent(selectedItemIds,this.state);
+  }
+  @autobind
+  private _stateOriginalConsent(selectedItemIds: number[], state:IGdprInsertEventState): void {
+    state.originalConsent = selectedItemIds[0];
+    this.setState(this.state);
     this._updateState(this.state);
   }
-
+  @autobind
+  private _stateNotifyApplicable(checked: boolean , state:IGdprInsertEventState): void {
+    state.notifyApplicable = checked;
+    this.setState(this.state);
+  }
   @autobind
   private _onChangedNotifyApplicable(checked: boolean): void {
-    this.setState.bind(this,{notifyApplicable : checked});
+    this._stateNotifyApplicable(checked,this.state);
     this._updateState(this.state);
   }
-
+  @autobind
+  private _stateProcessingType(items: ISPTermObject[], state:IGdprInsertEventState): void {
+    state.processingType = items;
+    this.setState(this.state);
+  }
   @autobind
   private _onChangedProcessingType(terms: ISPTermObject[]): void {
     if (terms != null && terms.length > 0)
     {
-      this.setState.bind(this,{processingType : terms});
+      this._stateProcessingType( terms, this.state);
     }
     else
     {
-      this.setState.bind(this,{processingType : []});
+      this._stateProcessingType([], this.state);
     }
     this._updateState(this.state);
   }
-
+  @autobind
+  private _stateProcessors(items: string[], state:IGdprInsertEventState): void {
+    state.processors = items;
+    this.setState(this.state);
+  }
   @autobind
   private _onChangedProcessors(items: string[]): void {
-    this.setState.bind(this,{processors : items});
+    this._stateProcessors(items,this.state);
     this._updateState(this.state);
   }
-
+  @autobind
+  private _stateArchivedData(newValue: string , state:IGdprInsertEventState): void {
+    state.archivedData = newValue;
+    this.setState(this.state);
+  }
   @autobind
   private _onChangedArchivedData(newValue: string): void {
-    this.setState.bind(this,{archivedData : newValue});
+    this._stateArchivedData(newValue, this.state);
     this._updateState(this.state);
   }
 
   @autobind
   private _onChangedAnonymize(checked: boolean): void {
-    this.setState.bind(this,{anonymize : checked});
+    this._stateAnonymize(checked,this.state);
     this._updateState(this.state);
   }
-
+  @autobind
+  private _stateAnonymize(checked: boolean, state:IGdprInsertEventState): void {
+    state.anonymize = checked;
+    this.setState(this.state);
+   }
   @autobind
   private _onChangedArchivingNotes(newValue: string): void {
-    this.setState.bind(this,{archivingNotes : newValue});
+    this._stateArchivingNotes(newValue,this.state);
     this._updateState(this.state);
   }
-
+  @autobind
+  private _stateArchivingNotes(newValue: string, state:IGdprInsertEventState ): void {
+    state.archivingNotes = newValue;
+    this.setState(this.state);
+  }
+  
   @autobind
   private _saveClick(event) {
     event.preventDefault();
@@ -1129,12 +1300,17 @@ export default class GdprInsertEvent extends React.Component<IGdprInsertEventPro
       }
 
       dataManager.insertNewEvent(eventItem).then((itemId: number) => {
-        this.setState.bind(this,{showDialogResult : true});
+        this._openInsertDialogResultState(true, this.state);
         this._updateState(this.state);
       });
     }
   }
-
+  @autobind
+  private _openInsertDialogResultState(showDialogResult:boolean, state:IGdprInsertEventState) {
+    state.showDialogResult = showDialogResult;
+    this.setState(this.state);
+    
+  }
   @autobind
   private _cancelClick(event) {
     event.preventDefault();
@@ -1142,12 +1318,12 @@ export default class GdprInsertEvent extends React.Component<IGdprInsertEventPro
   }
 
   private _formIsValid() : boolean {
-      let isValid: boolean = 
+ /*     let isValid: boolean = 
       (this.state.title != null && this.state.title.length > 0) &&
       (this.state.notifiedBy != null && this.state.notifiedBy.length > 0) &&
       (this.state.eventStartDate != null) &&
       (this.state.postEventReport != null && this.state.postEventReport.length > 0);
-/*
+*/
  let isValid: boolean = 
       (this.state.title != null && this.state.title.length > 0) &&
       (this.state.notifiedBy != null && this.state.notifiedBy.length > 0) &&
@@ -1159,7 +1335,7 @@ export default class GdprInsertEvent extends React.Component<IGdprInsertEventPro
       isValid = isValid && this.state.severity != null;
       isValid = isValid && ((this.state.dpaNotified && this.state.dpaNotificationDate != null) || (!this.state.dpaNotified));
       }
-*/
+
    
     if (this.state.currentEventType == "IdentityRisk") {
       isValid = isValid && this.state.riskType != null;
@@ -1181,10 +1357,15 @@ export default class GdprInsertEvent extends React.Component<IGdprInsertEventPro
 
     return(isValid);
   }
-
+  @autobind
+  private _closeInsertDialogResultState(showDialogResult:boolean, state:IGdprInsertEventState) {
+    state.showDialogResult = showDialogResult;
+    this.setState(this.state);
+    
+  }
   @autobind
   private _closeInsertDialogResult() {
-    this.setState.bind(this,{showDialogResult : false});
+    this._closeInsertDialogResultState(false,this.state);
     this._updateState(this.state);
   }
 

@@ -89,14 +89,20 @@ export class SPPeoplePicker extends React.Component<ISPPeoplePickerProps, ISPPeo
     items.forEach((i: IPersonaProps) => {
         itemsCount.push(i.secondaryText);
     });
-    this.setState({items:itemsCount});
+    this._itemsUpdate(itemsCount, this.state);
 
     if (this.props.onChanged != null)
     {
         this.props.onChanged(this.state.items);
     }
   }
-
+  @autobind
+  private _itemsUpdate (items: string[], state:ISPPeoplePickerState) : void {
+    if (items == null)
+      return;
+    state.items = items;
+    this.setState(this.state);
+  }
   @autobind
   private _onFilterChangedPeoplePicker(filterText: string, currentPersonas: IPersonaProps[], limitResults?: number) {
     

@@ -121,6 +121,8 @@ export default class GdprInsertRequest extends React.Component<IGdprInsertReques
                     text: strings.RequestTypeEraseLabel,
                   }
                 ]}
+                selectedKey={this.state.currentRequestType}
+                
               />
             </div>
           </div>

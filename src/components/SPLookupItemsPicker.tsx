@@ -122,14 +122,20 @@ export class SPLookupItemsPicker extends React.Component<ISPLookupItemsPickerPro
     items.forEach((i: ISPItemProps) => {
         itemsIds.push(i.itemId);
     });
-    this.setState({itemsIds:itemsIds});
-
+    //this.setState({itemsIds:itemsIds});
+    this._itemsIdsUpdate(itemsIds, this.state);
     if (this.props.onChanged != null)
     {
         this.props.onChanged(this.state.itemsIds);
     }
   }
-
+  @autobind
+  private _itemsIdsUpdate (itemsIds: number[], state:ISPLookupItemsPickerState) : void {
+    if (itemsIds == null)
+      return;
+    state.itemsIds = itemsIds;
+    this.setState(this.state);
+  }
   @autobind
   private _onFilterChangedLookupItemsPicker(filterText: string, currentItems: ISPItemProps[]) : Promise<ISPItemProps[]> {
     

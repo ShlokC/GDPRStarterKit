@@ -164,12 +164,20 @@ export class SPDateTimePicker extends React.Component<ISPDateTimePickerProps, IS
   }
 
   @autobind
+  private _dateUpdate (date: Date, state:ISPDateTimePickerState) : void {
+    if (date == null)
+      return;
+    state.date = date;
+    this.setState(this.state);
+    this.saveFullDate();
+  }
+  @autobind
   private _dateSelected (date: Date) : void {
     if (date == null)
       return;
     //this.state.date = date;
-    this.setState({date:date});
-    this.saveFullDate();
+    this._dateUpdate(date, this.state);
+    //this.saveFullDate();
   }
 
   @autobind

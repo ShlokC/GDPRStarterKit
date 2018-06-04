@@ -127,14 +127,20 @@ export class SPTaxonomyPicker extends React.Component<ISPTaxonomyPickerProps, IS
     items.forEach((i: ISPTaxonomyTermProps) => {
         terms.push( { name: i.name, guid: i.termId });
     });
-    this.setState({terms:terms});
+    this._itemsUpdate(terms,this.state);
 
     if (this.props.onChanged != null)
     {
         this.props.onChanged(this.state.terms);
     }
   }
-
+  @autobind
+  private _itemsUpdate (items: ISPTermObject[], state:ISPTaxonomyPickerState) : void {
+    if (items == null)
+      return;
+    state.terms = items;
+    this.setState(this.state);
+  }
   @autobind
   private _onFilterChangedTaxonomyPicker(filterText: string, currentItems: ISPTaxonomyTermProps[]) : ISPTaxonomyTermProps[] {
     
