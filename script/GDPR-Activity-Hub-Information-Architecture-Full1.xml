@@ -1,0 +1,102 @@
+﻿<?xml version="1.0"?>
+<pnp:Provisioning xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
+  <pnp:Preferences Generator="OfficeDevPnP.Core, Version=3.14.1910.1, Culture=neutral, PublicKeyToken=null" />
+  <pnp:Templates ID="CONTAINER-TEMPLATE-5E3B9BE6176C475ABD2ACBA3840CE97C">
+    <pnp:ProvisioningTemplate ID="TEMPLATE-5E3B9BE6176C475ABD2ACBA3840CE97C" Version="1" BaseSiteTemplate="GROUP#0">
+      <pnp:SiteFields>
+        <Field Type="Note" DisplayName="GDPRRiskType_0" StaticName="m23b2cf910684f13aff8b226db423e20" Name="m23b2cf910684f13aff8b226db423e20" ID="{9092ee13-4b51-415f-a96f-4fc0a988d45b}" ShowInViewForms="FALSE" Required="FALSE" Hidden="TRUE" CanToggleHidden="TRUE" SourceID="{bbe859fc-2106-4b85-96c9-708a8585df98}" />
+        <Field Type="Note" DisplayName="GDPRIncludesSensitiveData_0" StaticName="p65678d034094ac3b23ada67a9a2f3d7" Name="p65678d034094ac3b23ada67a9a2f3d7" ID="{5d8827de-9005-4a2b-a952-8c3e5b449db2}" ShowInViewForms="FALSE" Required="FALSE" Hidden="TRUE" CanToggleHidden="TRUE" SourceID="{bbe859fc-2106-4b85-96c9-708a8585df98}" />
+        <Field Type="Note" DisplayName="GDPRDeliveryFormat_0" StaticName="k23db0c33cc449918782b89638878aee" Name="k23db0c33cc449918782b89638878aee" ID="{42ac8c8e-e0b6-4c74-ae5b-e63b030ee543}" ShowInViewForms="FALSE" Required="FALSE" Hidden="TRUE" CanToggleHidden="TRUE" SourceID="{bbe859fc-2106-4b85-96c9-708a8585df98}" />
+        <Field Type="Note" DisplayName="GDPRDeliveryMethod_0" StaticName="e3db00c241f843feaa7bf58fb4cfcac2" Name="e3db00c241f843feaa7bf58fb4cfcac2" ID="{90e8cf6d-4722-4bc4-a04c-19ebe829e2fd}" ShowInViewForms="FALSE" Required="FALSE" Hidden="TRUE" CanToggleHidden="TRUE" SourceID="{bbe859fc-2106-4b85-96c9-708a8585df98}" />
+        <Field Type="Note" DisplayName="GDPRConsentType_0" StaticName="a0dce788628b4762be4c0fae9bee3096" Name="a0dce788628b4762be4c0fae9bee3096" ID="{9a068b83-9cdd-4930-bd32-3ca55f8be8ad}" ShowInViewForms="FALSE" Required="FALSE" Hidden="TRUE" CanToggleHidden="TRUE" SourceID="{bbe859fc-2106-4b85-96c9-708a8585df98}" />
+        <Field Type="Note" DisplayName="GDPRContactRole_0" StaticName="c5dc536949944fe3ae848af0aff90398" Name="c5dc536949944fe3ae848af0aff90398" ID="{9562000c-d70b-495a-a535-b00502c2be1b}" ShowInViewForms="FALSE" Required="FALSE" Hidden="TRUE" CanToggleHidden="TRUE" SourceID="{bbe859fc-2106-4b85-96c9-708a8585df98}" />
+        <Field Type="Note" DisplayName="GDPRWithdrawalType_0" StaticName="b900b350bfe4474e923938eb73598802" Name="b900b350bfe4474e923938eb73598802" ID="{1c819df2-31b2-47b4-9647-0cf254f57146}" ShowInViewForms="FALSE" Required="FALSE" Hidden="TRUE" CanToggleHidden="TRUE" SourceID="{bbe859fc-2106-4b85-96c9-708a8585df98}" />
+        <Field Type="Note" DisplayName="GDPRSeverity_0" StaticName="adbd424780e6462f9a29f9b27f98722a" Name="adbd424780e6462f9a29f9b27f98722a" ID="{e67474b2-ded8-46d8-8a26-86b3c08fe9a3}" ShowInViewForms="FALSE" Required="FALSE" Hidden="TRUE" CanToggleHidden="TRUE" SourceID="{bbe859fc-2106-4b85-96c9-708a8585df98}" />
+        <Field Type="Note" DisplayName="GDPRProcessingType_0" StaticName="f9daa214b1dd4b0dafb30c8f454778ec" Name="f9daa214b1dd4b0dafb30c8f454778ec" ID="{f23daee7-68f3-44d7-9005-b1fd919ac0c3}" ShowInViewForms="FALSE" Required="FALSE" Hidden="TRUE" CanToggleHidden="TRUE" SourceID="{bbe859fc-2106-4b85-96c9-708a8585df98}" />
+        <Field Type="Note" DisplayName="GDPRBreachType_0" StaticName="e8182e0d9f414d6da4895ed1a8586b88" Name="e8182e0d9f414d6da4895ed1a8586b88" ID="{6a344115-9ed0-4c2e-83a8-f40d46b16d76}" ShowInViewForms="FALSE" Required="FALSE" Hidden="TRUE" CanToggleHidden="TRUE" SourceID="{bbe859fc-2106-4b85-96c9-708a8585df98}" />
+        <Field Type="DateTime" DisplayName="Event Start Date" Required="TRUE" EnforceUniqueValues="FALSE" Indexed="FALSE" Format="DateTime" Group="GDPR Columns" FriendlyDisplayFormat="Disabled" ID="{f461f406-0e20-496f-ae5f-f57199bc8184}" SourceID="{bbe859fc-2106-4b85-96c9-708a8585df98}" StaticName="GDPRReportStartDateTime" Name="GDPRReportStartDateTime" CustomFormatter="" CalType="0">
+          <Default>[today]</Default>
+        </Field>
+        <Field Type="Boolean" DisplayName="Original Consent Available" EnforceUniqueValues="FALSE" Indexed="FALSE" Group="GDPR Columns" ID="{0130230b-e637-4455-961c-172a2c9acdca}" SourceID="{bbe859fc-2106-4b85-96c9-708a8585df98}" StaticName="GDPRConsentLookupAvailable" Name="GDPRConsentLookupAvailable" CustomFormatter="" Required="FALSE">
+          <Default>1</Default>
+        </Field>
+      </pnp:SiteFields>
+	   <pnp:TermGroups>
+        <pnp:TermGroup Name="GDPR" ID="ba283641-3bc0-434f-a03a-908b9a48508c" Description="">
+          <pnp:TermSets>
+            <pnp:TermSet Name="Breach Type" ID="5d9e1e81-b1c4-43d2-b2fc-61d355bd5f47" Description="">
+              <pnp:Terms>
+                <pnp:Term Name="Credit Card Loss" ID="fed76ca2-7d7d-405b-863c-70e807998cea" SourceTermId="fed76ca2-7d7d-405b-863c-70e807998cea" />
+                <pnp:Term Name="Hacking" ID="e0f87f55-7d87-4e1e-b7a5-572df1fa8d87" SourceTermId="e0f87f55-7d87-4e1e-b7a5-572df1fa8d87" />
+                <pnp:Term Name="IT Security Issue" ID="77817d29-352f-4b36-83cc-8a725a87db96" SourceTermId="77817d29-352f-4b36-83cc-8a725a87db96" />
+                <pnp:Term Name="Tampering" ID="4468815e-1e41-4ca6-869b-2d0ad2ff442b" SourceTermId="4468815e-1e41-4ca6-869b-2d0ad2ff442b" />
+              </pnp:Terms>
+            </pnp:TermSet>
+            <pnp:TermSet Name="Consent Type" ID="7c58f6a5-d8c0-4276-9ffb-368ef255867c" Description="">
+              <pnp:Terms>
+                <pnp:Term Name="Direct Email Marketing" ID="ed7a834e-c629-42ef-ab94-b7b1d75d55f6" SourceTermId="ed7a834e-c629-42ef-ab94-b7b1d75d55f6" />
+                <pnp:Term Name="Mailing" ID="ef7678d8-50f1-4c0a-a8b0-88d2612ef503" SourceTermId="ef7678d8-50f1-4c0a-a8b0-88d2612ef503" />
+                <pnp:Term Name="Phone Calls" ID="9810ee72-67ed-4b87-9e79-799527677c30" SourceTermId="9810ee72-67ed-4b87-9e79-799527677c30" />
+              </pnp:Terms>
+            </pnp:TermSet>
+            <pnp:TermSet Name="Delivery Format" ID="9fa393cb-1447-4f89-a137-a1423ad2c747" Description="">
+              <pnp:Terms>
+                <pnp:Term Name="CSV" ID="31d6e292-9224-4ea2-ab5e-816bc8eab07b" SourceTermId="31d6e292-9224-4ea2-ab5e-816bc8eab07b" />
+                <pnp:Term Name="PDF" ID="751a3583-a3f9-450f-86de-5abe1267fd57" SourceTermId="751a3583-a3f9-450f-86de-5abe1267fd57" />
+                <pnp:Term Name="RTF" ID="38126b42-8038-442a-a6cc-0a6b20f76685" SourceTermId="38126b42-8038-442a-a6cc-0a6b20f76685" />
+                <pnp:Term Name="TXT" ID="0ad27c72-15a3-4c2b-baa8-85c34879e3a8" SourceTermId="0ad27c72-15a3-4c2b-baa8-85c34879e3a8" />
+                <pnp:Term Name="XLSX" ID="aefcc360-d823-4d17-bd75-9768e9df06de" SourceTermId="aefcc360-d823-4d17-bd75-9768e9df06de" />
+              </pnp:Terms>
+            </pnp:TermSet>
+            <pnp:TermSet Name="Delivery Methods" ID="4b7df166-f980-40e1-a8af-f269666a0841" Description="">
+              <pnp:Terms>
+                <pnp:Term Name="Email" ID="26a420a8-6b92-49ee-98c0-ebbd6075e203" SourceTermId="26a420a8-6b92-49ee-98c0-ebbd6075e203" />
+                <pnp:Term Name="OneDrive for Business" ID="942b873d-e4a1-449b-9dbb-5f2a96a13967" SourceTermId="942b873d-e4a1-449b-9dbb-5f2a96a13967" />
+                <pnp:Term Name="Paper" ID="d0b0a4b5-adaf-4e08-ab20-c3b02a1ea4ae" SourceTermId="d0b0a4b5-adaf-4e08-ab20-c3b02a1ea4ae" />
+              </pnp:Terms>
+            </pnp:TermSet>
+            <pnp:TermSet Name="GDPR Role" ID="86549c68-d19c-4299-af49-bffe5de042a9" Description="">
+              <pnp:Terms>
+                <pnp:Term Name="Data Protection Officer" ID="8fb4774c-2f1a-4bea-b7a4-75ebfe74cbdc" SourceTermId="8fb4774c-2f1a-4bea-b7a4-75ebfe74cbdc" />
+                <pnp:Term Name="GDPR Controller" ID="0cc951b5-612f-4d83-9e90-7993c3c0d15e" SourceTermId="0cc951b5-612f-4d83-9e90-7993c3c0d15e" />
+                <pnp:Term Name="GDPR Processor" ID="e28a2c76-eb00-4f5f-95e7-673b24b9b4dd" SourceTermId="e28a2c76-eb00-4f5f-95e7-673b24b9b4dd" />
+              </pnp:Terms>
+            </pnp:TermSet>
+            <pnp:TermSet Name="Processing Type" ID="a2ec82d3-5029-46aa-a602-e8dd2dd300bd" Description="">
+              <pnp:Terms>
+                <pnp:Term Name="Data Normalization" ID="f31ec9dd-607b-4659-a9d4-92e2ed616b93" SourceTermId="f31ec9dd-607b-4659-a9d4-92e2ed616b93" />
+                <pnp:Term Name="Direct Email Marketing" ID="e754ca83-988e-456d-82bd-5752c529dcd7" SourceTermId="e754ca83-988e-456d-82bd-5752c529dcd7" />
+                <pnp:Term Name="Mailing Marketing" ID="5c9f25bc-187d-4908-8a7e-5f84f01acafb" SourceTermId="5c9f25bc-187d-4908-8a7e-5f84f01acafb" />
+              </pnp:Terms>
+            </pnp:TermSet>
+            <pnp:TermSet Name="Risk Type" ID="2cc01ac9-bea5-413c-8d56-7d8be5ea7d59" Description="">
+              <pnp:Terms>
+                <pnp:Term Name="Credit Card Loss" ID="b9a63bb4-9e1a-4172-9f57-59a0e56711c1" SourceTermId="b9a63bb4-9e1a-4172-9f57-59a0e56711c1" />
+                <pnp:Term Name="Identity Theft" ID="d5e664f1-4d45-4be1-b658-1db0b6368adb" SourceTermId="d5e664f1-4d45-4be1-b658-1db0b6368adb" />
+                <pnp:Term Name="Password Loss" ID="abad4ac9-2c4b-446e-8f3d-fe92800f47a9" SourceTermId="abad4ac9-2c4b-446e-8f3d-fe92800f47a9" />
+                <pnp:Term Name="SSN Loss" ID="997b9d72-8862-42d6-9ed5-266426a6993f" SourceTermId="997b9d72-8862-42d6-9ed5-266426a6993f" />
+              </pnp:Terms>
+            </pnp:TermSet>
+            <pnp:TermSet Name="Sensitive Data Type" ID="44e607d3-936c-4626-b3fd-e73227ca2084" Description="">
+              <pnp:Terms>
+                <pnp:Term Name="Biometric Data" ID="93aab959-0a05-4494-96ce-4c74c38d7ca8" SourceTermId="93aab959-0a05-4494-96ce-4c74c38d7ca8" />
+                <pnp:Term Name="Political Opinions" ID="3ccb7f33-35e4-4683-8b21-29ff5d3c6eb5" SourceTermId="3ccb7f33-35e4-4683-8b21-29ff5d3c6eb5" />
+              </pnp:Terms>
+            </pnp:TermSet>
+            <pnp:TermSet Name="Severity" ID="ea206112-55cc-4440-a683-a0e7399cbe99" Description="">
+              <pnp:Terms>
+                <pnp:Term Name="Critical" ID="f3782641-eac5-4c83-9c24-5a6f3807da01" SourceTermId="f3782641-eac5-4c83-9c24-5a6f3807da01" />
+                <pnp:Term Name="High" ID="8ba86630-cb0a-46b0-bf7c-a2572d764d9a" SourceTermId="8ba86630-cb0a-46b0-bf7c-a2572d764d9a" />
+                <pnp:Term Name="Low" ID="e0959c97-5dca-441f-a79c-e2246bd9f89d" SourceTermId="e0959c97-5dca-441f-a79c-e2246bd9f89d" />
+                <pnp:Term Name="Medium" ID="ee2ca4f3-6dfb-48d8-b8ec-3fb56aadf673" SourceTermId="ee2ca4f3-6dfb-48d8-b8ec-3fb56aadf673" />
+              </pnp:Terms>
+            </pnp:TermSet>
+          </pnp:TermSets>
+          <pnp:Contributors />
+          <pnp:Managers />
+        </pnp:TermGroup>
+      </pnp:TermGroups>
+    
+    </pnp:ProvisioningTemplate>
+  </pnp:Templates>
+</pnp:Provisioning>

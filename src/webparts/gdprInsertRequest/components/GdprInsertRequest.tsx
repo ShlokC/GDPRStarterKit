@@ -61,7 +61,7 @@ export default class GdprInsertRequest extends React.Component<IGdprInsertReques
     super();
     
     this.state = {
-      currentRequestType : "Access",
+      currentRequestType : "Export",
       isValid: false,
       showDialogResult: false,
       title:"",
@@ -369,14 +369,20 @@ export default class GdprInsertRequest extends React.Component<IGdprInsertReques
     );
   }
 
-  @autobind
-  private _onChangedRequestType(ev: React.FormEvent<HTMLInputElement>, option: any) {
-    this.setState.bind(this,{currentRequestType : option.key} as IGdprInsertRequestState);
-    this.setState.bind(this,{deliveryMethod : null} as IGdprInsertRequestState);
-    this.setState.bind(this,{deliveryFormat : null}as IGdprInsertRequestState);
-    this.setState.bind(this,{processingType : []} as IGdprInsertRequestState);
+  //@autobind
+  private _onChangedRequestType=(ev: React.FormEvent<HTMLInputElement>, option: any)=> {
+    this.setState({
+      currentRequestType : option.key,
+      deliveryMethod : null,
+      deliveryFormat : null,
+      processingType : []
+    });
+    //this.setState.bind(this,{currentRequestType : option.key} as IGdprInsertRequestState);
+    //this.setState.bind(this,{deliveryMethod : null} as IGdprInsertRequestState);
+    //this.setState.bind(this,{deliveryFormat : null}as IGdprInsertRequestState);
+    //this.setState.bind(this,{processingType : []} as IGdprInsertRequestState);
 
-    this._updateState(this.state);
+    //this._updateState(this.state);
   }
 
   @autobind
@@ -584,8 +590,8 @@ export default class GdprInsertRequest extends React.Component<IGdprInsertReques
     this._updateState(this.state);
   }
 
-  @autobind
-  private _saveClick(event) {
+ // @autobind
+  private _saveClick=(event : any) => {
     event.preventDefault();
     if (this._formIsValid())
     {
@@ -648,8 +654,9 @@ export default class GdprInsertRequest extends React.Component<IGdprInsertReques
       }
 
       dataManager.insertNewRequest(request).then((itemId: number) => {
-        this.setState.bind(this,{showDialogResult : true});
-        this._updateState(this.state);
+        this.setState({showDialogResult : true});
+        //this.setState.bind(this,{showDialogResult : true});
+       // this._updateState(this.state);
       });
     }
   }
@@ -684,10 +691,11 @@ export default class GdprInsertRequest extends React.Component<IGdprInsertReques
     return(isValid);
   }
 
-  @autobind
-  private _closeInsertDialogResult() {
-    this.setState.bind(this,{showDialogResult : false});
-    this._updateState(this.state);
+ // @autobind
+  private _closeInsertDialogResult=() =>{
+    this.setState({showDialogResult : false});
+   // this.setState.bind(this,{showDialogResult : false});
+   // this._updateState(this.state);
   }
 
   @autobind
