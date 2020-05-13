@@ -4,7 +4,7 @@ param
 (
     [Parameter(Mandatory = $true, HelpMessage="The URL of the already created Modern Site")]
     [String]
-    $GroupSiteUrl="https://m365x307051.sharepoint.com/sites/GDPRManagement",
+    $GroupSiteUrl="",
 
     [Parameter(ParameterSetName = "CDN", Mandatory = $false, HelpMessage="Declares whether to create and configure a CDN in the target Office 365 tenant")]
     [Switch]
